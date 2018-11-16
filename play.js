@@ -22,6 +22,8 @@ ver 1.7 Add Strip Opponent Feature
 13. when JS-chan reach her last strip, the game end.
 14. Add init function, restart button, and new game.
 
+Optional
+15. Add some CSS for Good Looks!
 
 
 */
