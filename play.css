@@ -8,3 +8,25 @@
 #battleNow.appear {
     display: inline;
 }
+header {
+    text-align: center;
+}
+section {
+    width: 1000px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.battleside {
+    width: 35%;
+    float: left;
+}
+
+.stripgirl {
+    width: 60%;
+    float: right;
+}
+.stripgirl img {
+    width: 100%;
+    height: auto;;
+}
