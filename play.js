@@ -15,8 +15,9 @@ ver. 1.5
 
 
 ver 1.7 Add Strip Opponent Feature
-9.  Prepare several images from initial, strip upper clothes, strip bottom clothes, strip underwear 1 as much as u like)
-10. display initial image
+9.  Prepare several images from initial, strip upper clothes, strip bottom clothes, 
+    strip underwear 1 as much as u like) (done)
+10. display initial image (done)
 11. if Player win 2 times in a row, then strip once.
 12. if Player lose 2 times in a row, cancel the strip once.
 13. when JS-chan reach her last strip, the game end.
@@ -36,6 +37,7 @@ battleBtn = document.getElementById('battleNow');
 plScore = document.getElementById('playerScore');
 jsScore = document.getElementById('jsScore');
 roundPlayed = document.getElementById('battleRound');
+strip = document.getElementById('strip');
 
 scoreBoard = [0, 0, 0];
         
@@ -43,6 +45,7 @@ scoreBoard = [0, 0, 0];
 playerChoice.addEventListener('change', function(){
     if (playerChoice.value !== ""){
         battleBtn.className = 'appear';
+
     } else {
         console.log('please enter');
     }
@@ -50,7 +53,7 @@ playerChoice.addEventListener('change', function(){
 
 battleBtn.addEventListener('click', function(){
     //set variable
-    var jsStance, jsHand, scr, ppr, rck, battleResult, battleBtn;
+    var jsStance, jsHand, scr, ppr, rck, battleResult, battleBtn, lastWin;
     scoreBoard[2] += 1;
     scr = 'Scissor';
     ppr = 'Paper';
@@ -82,12 +85,14 @@ battleBtn.addEventListener('click', function(){
             return battleResult = 'U Win!';
         } else if ((a == ppr && b == scr) || (a == rck && b == ppr ) || ( a == scr && b == rck)) {
             scoreBoard[1] += 1;
+            lastWin += 1;
             return battleResult = 'U Lose!';
         } else {
             return battleResult = 'It\'s a Draw!';
         }
     }
 
+    
     plScore.textContent = scoreBoard[0];
     jsScore.textContent = scoreBoard[1];   
     roundPlayed.textContent = scoreBoard[2]; 
@@ -99,6 +104,14 @@ battleBtn.addEventListener('click', function(){
 
     
 });
+
+
+// Strip Function 
+function imgstrip(x){
+    strip.src = '/img/strip-' + x + '.png'
+    return strip;  
+}
+
 
 
 // document.querySelector('.resultboard').classList.add('appear');

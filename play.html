@@ -10,31 +10,34 @@
         <a href="index.html">back to home</a>
         <hr />
 
+        <header>
+            <h1>Play Rock Paper Scissor with JS</h1>
+            <p>Round Played: <span id="battleRound">0</span></p>
+            <p>You = <span id="playerScore">99</span>  vs JS-Chan = <span id="jsScore">99</span></p>
+        </header>
+        <section>
+            <div class="battleside">
+                <select id="playerChoice">
+                    <option value="">Pick Your Stance</option>
+                    <option value="Scissor">Scissor</option>
+                    <option value="Paper">Paper</option>
+                    <option value="Rock">Rock</option>
+                </select>
 
-        <h1>Play Rock Paper Scissor with JS</h1>
-        <p>Round Played: <span id="battleRound">0</span></p>
-        <p>You = <span id="playerScore">99</span>  vs JS-Chan = <span id="jsScore">99</span></p>
+                <button id="battleNow">Battle Now!</button>
 
-        <select id="playerChoice">
-            <option value="">Pick Your Stance</option>
-            <option value="Scissor">Scissor</option>
-            <option value="Paper">Paper</option>
-            <option value="Rock">Rock</option>
-        </select>
+                <div class="resultboard">
+                    <h2 id="playerHand">Your stance is Rock!</h2>
+                    <h2 id="jsHand">JS's stance is Scissor!</h2>
+                    <h1 id="result">You Win!</h1>
+                </div>
+            </div>
+            <div class="stripgirl">
+                <img id="strip" src="img/strip-01.jpg" alt="Images" />
+            </div>
+        </section>
 
-        <button id="battleNow">Battle Now!</button>
-
-        
-
-        <div class="resultboard">
-            <h2 id="playerHand">Your stance is Rock!</h2>
-            <h2 id="jsHand">JS's stance is Scissor!</h2>
-            <h1 id="result">You Win!</h1>
-        </div>
-
-        
-
-        
+    
 
 
         <script src="play.js"></script>
