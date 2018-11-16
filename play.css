@@ -1,0 +1,10 @@
+.resultboard, #battleNow {
+    display: none;
+}
+
+.resultboard.appear {
+    display: block;
+}
+#battleNow.appear {
+    display: inline;
+}
