@@ -16,6 +16,7 @@ ver. 1.5
 
 
 ver 1.75 Add Strip Opponent Feature
+
 9.  Prepare several images from initial, strip upper clothes, strip bottom clothes, strip underwear 1 as much as u like)
 10. display initial image
 11. if Player win 2 times in a row, then strip once.
