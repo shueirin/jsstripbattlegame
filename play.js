@@ -40,13 +40,12 @@ jsScore = document.getElementById('jsScore');
 roundPlayed = document.getElementById('battleRound');
 strip = document.getElementById('strip');
 
-scoreBoard = [0, 0, 0, 0];
+scoreBoard = [0, 0, 0, 0, 0];
         
 //display battle button 
 playerChoice.addEventListener('change', function(){
     if (playerChoice.value !== ""){
         battleBtn.className = 'appear';
-
     } else {
         console.log('please enter');
     }
@@ -59,7 +58,6 @@ battleBtn.addEventListener('click', function(){
     scr = 'Scissor';
     ppr = 'Paper';
     rck = 'Rock';
-    lastWin = 0;
 
     //let js pick her hand
     jsStance = Math.floor(Math.random() * 3) + 1;
@@ -87,28 +85,33 @@ battleBtn.addEventListener('click', function(){
     // Compare both hands to Get Result
     function compare(a, b){
         if ((a == scr && b == ppr) || (a == ppr && b == rck ) || ( a == rck && b == scr)) {
-            scoreBoard[0] += 1;
-            scoreBoard[3] += 1;
-            imgstrip(scoreBoard[3]); // strip when u win!
+       
+            scoreBoard[0] += 1;  // add 1 to win score 
+            scoreBoard[4] += 1;  // add 1 to strip indicator 
+
+            if( scoreBoard[4] >= 2){  //when this reach 2, then strip!
+                scoreBoard[3] += 1;
+                imgstrip(scoreBoard[3]); 
+                document.getElementById('indicator').textContent += '[x]';
+                scoreBoard[4] = 0;
+            }
             return battleResult = 'U Win!';
         } else if ((a == ppr && b == scr) || (a == rck && b == ppr ) || ( a == scr && b == rck)) {
             scoreBoard[1] += 1;
+            scoreBoard[4] = 0;
             return battleResult = 'U Lose!';
         } else {
             return battleResult = 'It\'s a Draw!';
         }
     }
 
-   
 
     // Strip Function 
     function imgstrip(x){
         strip.src = './img/strip-0' + x + '.jpg'
         return strip;  
     }
-
-
-
+    
     plScore.textContent = scoreBoard[0];
     jsScore.textContent = scoreBoard[1];   
     roundPlayed.textContent = scoreBoard[2]; 
