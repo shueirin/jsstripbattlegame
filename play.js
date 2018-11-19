@@ -15,13 +15,12 @@ ver. 1.5
 
 
 ver 1.7 Add Strip Opponent Feature
-9.  Prepare several images from initial, strip upper clothes, strip bottom clothes, 
-    strip underwear 1 as much as u like) (done)
-10. display initial image (done)
 
+9.  Prepare several images from initial, strip upper clothes, strip bottom clothes, strip underwear 1 as much as u like) (done)
+10. display initial image (done)
 11. if Player win 2 times in a row, then strip once. (done)
 12. if Player lose 3 times in a row, cancel the strip once. (done)
-13. when JS-chan reach her last strip, the game end.
+13. when JS-chan reach her last strip, the game end. (done)
 14. Add init function, restart button, and new game.
 
 Optional
