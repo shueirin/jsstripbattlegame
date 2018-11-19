@@ -19,8 +19,8 @@ ver 1.7 Add Strip Opponent Feature
     strip underwear 1 as much as u like) (done)
 10. display initial image (done)
 
-11. if Player win 2 times in a row, then strip once.
-12. if Player lose 2 times in a row, cancel the strip once.
+11. if Player win 2 times in a row, then strip once. (done)
+12. if Player lose 3 times in a row, cancel the strip once. (done)
 13. when JS-chan reach her last strip, the game end.
 14. Add init function, restart button, and new game.
 
@@ -40,7 +40,7 @@ jsScore = document.getElementById('jsScore');
 roundPlayed = document.getElementById('battleRound');
 strip = document.getElementById('strip');
 
-scoreBoard = [0, 0, 0, 0, 0];
+scoreBoard = [0, 0, 1, 0, 0, 0];
         
 //display battle button 
 playerChoice.addEventListener('change', function(){
@@ -84,21 +84,35 @@ battleBtn.addEventListener('click', function(){
 
     // Compare both hands to Get Result
     function compare(a, b){
+       
         if ((a == scr && b == ppr) || (a == ppr && b == rck ) || ( a == rck && b == scr)) {
        
             scoreBoard[0] += 1;  // add 1 to win score 
             scoreBoard[4] += 1;  // add 1 to strip indicator 
-
+            
             if( scoreBoard[4] >= 2){  //when this reach 2, then strip!
                 scoreBoard[3] += 1;
                 imgstrip(scoreBoard[3]); 
-                document.getElementById('indicator').textContent += '[x]';
                 scoreBoard[4] = 0;
+                scoreBoard[5] = 0;
+            }
+
+            if ( scoreBoard[3] >= 5) {
+                stopGame();
             }
             return battleResult = 'U Win!';
+
         } else if ((a == ppr && b == scr) || (a == rck && b == ppr ) || ( a == scr && b == rck)) {
             scoreBoard[1] += 1;
-            scoreBoard[4] = 0;
+            scoreBoard[5] += 1; 
+            if ( scoreBoard[5] >= 2){  //when this reach 2, then unstrip!
+                if( scoreBoard[3] <= 0) {
+                    scoreBoard[3] = 1; 
+                }
+                imgstrip(scoreBoard[3]); 
+                scoreBoard[4] = 0;
+                scoreBoard[5] = 0;
+            }
             return battleResult = 'U Lose!';
         } else {
             return battleResult = 'It\'s a Draw!';
@@ -108,10 +122,21 @@ battleBtn.addEventListener('click', function(){
 
     // Strip Function 
     function imgstrip(x){
+        if (x < 1){
+            x = 1;
+        } else if (x > 5){
+            x = 5;
+        }
         strip.src = './img/strip-0' + x + '.jpg'
         return strip;  
     }
-    
+
+    // Stop Game
+    function stopGame(){
+        document.getElementById('battleNow').disabled = true;
+        document.getElementById('battleNow').innerText = 'Game Over!'
+    }
+
     plScore.textContent = scoreBoard[0];
     jsScore.textContent = scoreBoard[1];   
     roundPlayed.textContent = scoreBoard[2]; 
