@@ -40,7 +40,7 @@ jsScore = document.getElementById('jsScore');
 roundPlayed = document.getElementById('battleRound');
 strip = document.getElementById('strip');
 
-scoreBoard = [0, 0, 1, 0, 0, 0];
+scoreBoard = [0, 0, 0, 0, 0, 0];
         
 //display battle button 
 playerChoice.addEventListener('change', function(){
@@ -58,6 +58,15 @@ battleBtn.addEventListener('click', function(){
     scr = 'Scissor';
     ppr = 'Paper';
     rck = 'Rock';
+
+    // Stop Game if it's already reach 30 turns!
+    if (scoreBoard[2] >= 21){
+        stopGame();
+        var word = document.createElement('h2');
+        var node = document.createTextNode('Too Bad! Maybe Next Time');
+        word.appendChild(node);
+        document.querySelector('stripgirl').appendChild(word);
+    }
 
     //let js pick her hand
     jsStance = Math.floor(Math.random() * 3) + 1;
@@ -77,10 +86,6 @@ battleBtn.addEventListener('click', function(){
 
     // Display Battle Result
     document.getElementById('result').textContent = compare(playerChoice.value, jsHand);
-
-    // set previous result to variable.
-    lastWin = battleResult;
-
 
     // Compare both hands to Get Result
     function compare(a, b){
