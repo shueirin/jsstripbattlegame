@@ -18,6 +18,7 @@ ver 1.7 Add Strip Opponent Feature
 9.  Prepare several images from initial, strip upper clothes, strip bottom clothes, 
     strip underwear 1 as much as u like) (done)
 10. display initial image (done)
+
 11. if Player win 2 times in a row, then strip once.
 12. if Player lose 2 times in a row, cancel the strip once.
 13. when JS-chan reach her last strip, the game end.
@@ -30,7 +31,7 @@ Optional
 */
 
 // GLOBALS 
-var playerChoice, battleBtn, scoreBoard, plScore, jsScore, roundPlayed;
+var playerChoice, battleBtn, scoreBoard, plScore, jsScore, roundPlayed, lastWin;
 
 playerChoice = document.getElementById('playerChoice');
 battleBtn = document.getElementById('battleNow');
@@ -39,7 +40,7 @@ jsScore = document.getElementById('jsScore');
 roundPlayed = document.getElementById('battleRound');
 strip = document.getElementById('strip');
 
-scoreBoard = [0, 0, 0];
+scoreBoard = [0, 0, 0, 0];
         
 //display battle button 
 playerChoice.addEventListener('change', function(){
@@ -53,11 +54,12 @@ playerChoice.addEventListener('change', function(){
 
 battleBtn.addEventListener('click', function(){
     //set variable
-    var jsStance, jsHand, scr, ppr, rck, battleResult, battleBtn, lastWin;
+    var jsStance, jsHand, scr, ppr, rck, battleResult, battleBtn, currentResult ;
     scoreBoard[2] += 1;
     scr = 'Scissor';
     ppr = 'Paper';
     rck = 'Rock';
+    lastWin = 0;
 
     //let js pick her hand
     jsStance = Math.floor(Math.random() * 3) + 1;
@@ -73,26 +75,40 @@ battleBtn.addEventListener('click', function(){
     document.getElementById('playerHand').textContent = "Your stance is " + playerChoice.value;
 
     // Display JS pick on DOM
-    document.getElementById('jsHand').textContent = "JS-chan stance is " + jsHand;
+    document.getElementById('jsHand').textContent = "JS stance is " + jsHand;
 
     // Display Battle Result
     document.getElementById('result').textContent = compare(playerChoice.value, jsHand);
+
+    // set previous result to variable.
+    lastWin = battleResult;
+
 
     // Compare both hands to Get Result
     function compare(a, b){
         if ((a == scr && b == ppr) || (a == ppr && b == rck ) || ( a == rck && b == scr)) {
             scoreBoard[0] += 1;
+            scoreBoard[3] += 1;
+            imgstrip(scoreBoard[3]); // strip when u win!
             return battleResult = 'U Win!';
         } else if ((a == ppr && b == scr) || (a == rck && b == ppr ) || ( a == scr && b == rck)) {
             scoreBoard[1] += 1;
-            lastWin += 1;
             return battleResult = 'U Lose!';
         } else {
             return battleResult = 'It\'s a Draw!';
         }
     }
 
-    
+   
+
+    // Strip Function 
+    function imgstrip(x){
+        strip.src = './img/strip-0' + x + '.jpg'
+        return strip;  
+    }
+
+
+
     plScore.textContent = scoreBoard[0];
     jsScore.textContent = scoreBoard[1];   
     roundPlayed.textContent = scoreBoard[2]; 
@@ -101,16 +117,9 @@ battleBtn.addEventListener('click', function(){
     
     //console.log('JS: ' + jsHand);
     //console.log('Player: ' + playerChoice.value);
-
-    
 });
 
 
-// Strip Function 
-function imgstrip(x){
-    strip.src = '/img/strip-' + x + '.png'
-    return strip;  
-}
 
 
 
